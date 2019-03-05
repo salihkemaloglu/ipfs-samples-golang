@@ -2,6 +2,10 @@ package db
 
 import (
 	"fmt"
+	"os"
+	"strings"
+
+	shell "github.com/ipfs/go-ipfs-api"
 )
 
 // Item a Items by its id
@@ -13,10 +17,40 @@ type Item struct {
 	Count       int    `bson:"count" json:"count"`
 }
 
-// FindByID a Items by its id
-func (r Item) FindByID() ([]byte, error) {
+// LsLink a Items by its id
+type LsLink struct {
+	Hash string
+	Name string
+	Size uint64
+	Type int
+}
 
-	fmt.Println(r)
+// Insert a Items by its id
+func (r Item) Insert() (string, error) {
 
-	return nil, nil
+	sh := shell.NewShell("localhost:5001")
+	cid, err := sh.Add(strings.NewReader(r.Name))
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %s", err)
+		return "nil", nil
+	}
+
+	return cid, nil
+
+}
+
+// GetAll a Items by its id
+func (r Item) GetAll() {
+
+	sh := shell.NewShell("localhost:5001")
+	cid, err := sh.List(r.Value)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error: %s", err)
+
+	}
+	fmt.Println("len", len(cid))
+	for index := 0; index < len(cid); index++ {
+		fmt.Fprintf(os.Stderr, "error: %v", cid[index])
+	}
+
 }
