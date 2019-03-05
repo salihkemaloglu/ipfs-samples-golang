@@ -7,8 +7,8 @@ import (
 	"os/exec"
 
 	shell "github.com/ipfs/go-ipfs-api"
-	"github.com/salihkemaloglu/goTests/db"
-	"github.com/salihkemaloglu/goTests/repos"
+	"github.com/salihkemaloglu/go-ipfs-tests/db"
+	"github.com/salihkemaloglu/go-ipfs-tests/repos"
 )
 
 func main() {
