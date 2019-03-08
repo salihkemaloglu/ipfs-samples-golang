@@ -25,6 +25,13 @@ type LsLink struct {
 	Type int
 }
 
+//User string
+type User struct {
+	Username string `bson:"author_id"`
+	Password string `bson:"content"`
+	Title    string `bson:"title"`
+}
+
 // Insert a Items by its id
 func (r Item) Insert() (string, error) {
 
